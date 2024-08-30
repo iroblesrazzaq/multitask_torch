@@ -445,7 +445,8 @@ class Model(object):
         """
 
         # Reset tensorflow graphs
-        tf.reset_default_graph()  # must be in the beginning
+        #tf.reset_default_graph()  # deprecated
+        tf.compat.v1.reset_default_graph()
 
         if hp is None:
             hp = tools.load_hp(model_dir)
