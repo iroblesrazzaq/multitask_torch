@@ -6,16 +6,17 @@ import os
 import numpy as np
 import pickle
 
-import tensorflow as tf
-from tensorflow.python.platform import tf_logging as logging
-from tensorflow.python.ops import variable_scope as vs
-from tensorflow.python.ops import array_ops
-from tensorflow.python.ops import init_ops
-from tensorflow.python.ops import math_ops
-from tensorflow.python.ops import nn_ops
-from tensorflow.python.util import nest
-from tensorflow.python.ops import rnn
-from tensorflow.python.ops.rnn_cell_impl import RNNCell
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+from tf.python.platform import tf_logging as logging
+from tf.python.ops import variable_scope as vs
+from tf.python.ops import array_ops
+from tf.python.ops import init_ops
+from tf.python.ops import math_ops
+from tf.python.ops import nn_ops
+from tf.python.util import nest
+from tf.python.ops import rnn
+from tf.python.ops.rnn_cell_impl import RNNCell
 
 import tools
 
@@ -453,8 +454,7 @@ class Model(object):
             if hp is None:
                 raise ValueError(
                     'No hp found for model_dir {:s}'.format(model_dir))
-
-        tf.set_random_seed(hp['seed'])
+        tf.random.set_seed(hp['seed'])
         self.rng = np.random.RandomState(hp['seed'])
 
         if sigma_rec is not None:
